@@ -22,3 +22,14 @@ class Course(models.Model):
     
     def __str__(self):
         return self.description
+    
+class Enrollment(models.Model):
+    SESSIONS = (
+        ('M', 'Morning'),
+        ('A', 'Afternoon'),
+        ('N', 'Night'),
+    )
+    
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    session = models.CharField(max_length=1, choices=SESSIONS, blank=False, null=False, default='M'),
